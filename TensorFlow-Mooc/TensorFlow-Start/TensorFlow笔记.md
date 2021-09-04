@@ -129,3 +129,52 @@
 
 ##### 5.安装tensorflow2.0
 
+🔗参考链接：`https://blog.csdn.net/weixin_41515197/article/details/112726989`
+
+- 输入`conda --version`可以看到版本信息。
+
+- 更换镜像的教程时他提供的命令是(不要用这条命令)：
+
+  ```bash
+  #修改镜像
+  #/free已经不更新,可以使用第二条连接
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  
+  conda config --set show_channel_urls yes
+  
+  #创建环境,此条命令可以在anaconda的UI界面中创建,python版本可以选择
+  conda create --name tensorflow python=3.7
+  ```
+
+- 安装完成后激活环境并安装
+
+  ```bash
+  #激活
+  conda activate tensorflow
+  #安装tensorFlow,地址可以在清华镜像中选择想要的版本
+  #https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/tensorflow/
+  pip install --ignore-installed --upgrade 地址
+  #关闭
+  conda deactive
+
+- 安装成功后<u>**进入`python`**</u>进行验证
+
+  ```bash 
+  #验证方法1:结果是你安装的tensorflow的版本号，说明安装成功了
+  >>> import tensorflow as tf
+  >>> tf.__version__
+  #验证方法2:适用于2.0以下版本，输出正确语句即成功
+  >>> import tensorflow as tf
+  >>> hello = tf.constant('Hello, TensorFlow!')
+  >>> sess = tf.Session()
+  >>> print(sess.run(hello))
+  Hello,TensorFlow!
+  #验证方法3:适用于2.0及以上版本
+  >>> import tensorflow as tf
+  >>> tf.compat.v1.disable_eager_execution()
+  >>> hello=tf.constant(‘Hello,Tensorflow!’)
+  >>> sess=tf.compat.v1.Session()
+  >>> print(sess.run(hello))
+  Hello,Tensorflow!
+  ```
